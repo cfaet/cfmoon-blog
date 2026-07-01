@@ -1,6 +1,13 @@
-a:not(.logo) {
-	color: var(--mooneghan-gold);
+a:not(.brand-link):not(.nav-link) {
+	color: var(--site-link);
+	text-decoration-color: color-mix(in srgb, var(--site-link), transparent 45%);
+	text-underline-offset: 0.18em;
+	transition:
+		color var(--transition-fast),
+		text-decoration-color var(--transition-fast);
 }
-a:not(.logo):hover {
-	color: var(--fusion-glow);
+
+a:not(.brand-link):not(.nav-link):hover {
+	color: var(--site-link-hover);
+	text-decoration-color: currentColor;
 }

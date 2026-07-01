@@ -1,13 +1,8 @@
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-import Control.Monad ((>=>))
-import Data.List (isSuffixOf)
 import Hakyll
 import Mooneghan.Contexts
 import System.FilePath (takeBaseName, takeFileName, (</>))
-import Text.Pandoc.Highlighting (Style, breezeDark, espresso, haddock, kate, pygments, styleToCss, tango, zenburn)
-import Text.Pandoc.Options (WriterOptions (writerHighlightStyle))
 
 main :: IO ()
 main =
@@ -18,12 +13,11 @@ feedConfiguration =
     FeedConfiguration
         { feedTitle = "The Aleph Project"
         , feedDescription = "Musings on software and life."
-        , feedAuthorName = "Catrin &amp; Fabrizio"
-        , feedAuthorEmail = "fabricus@cfmoon.net" -- Update this, cariad
-        , feedRoot = "https://cfmoon.net" -- Update this to the real URL
+        , feedAuthorName = "CFMoon Tech"
+        , feedAuthorEmail = "business@mail.cfmoon.net"
+        , feedRoot = siteRoot
         }
 
--- | Rules for our blog, Catrin-style
 cfmoonRules :: Rules ()
 cfmoonRules = do
     match "static/images/**" $
@@ -31,14 +25,13 @@ cfmoonRules = do
             >> compile copyFileCompiler
     match "static/css/*" $
         route idRoute >> compile compressCssCompiler
+    match "static/js/**" $
+        route idRoute
+            >> compile copyFileCompiler
 
     match "static/assets/robots.txt" $ do
         route cleanRobots
-        compile copyFileCompiler
-    -- create ["static/css/syntax.css"] $ do
-    --     route idRoute
-    --     compile $ do
-    --         makeItem $ styleToCss zenburn
+        compile $ getResourceString >>= applyAsTemplate mooneghanCtx
 
     match "posts/*" $ do
         route cleanRoute
@@ -67,65 +60,48 @@ cfmoonRules = do
                 >>= loadAndApplyTemplate "templates/default.html" (postListCtx archiveCtx)
                 >>= cleanInnerUrls
                 >>= relativizeUrls
-    -- Render the Atom Feed
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
             let feedCtx =
                     modificationTimeField "updated" "%Y-%m-%dT%H:%M:%SZ"
-                        `mappend` teaserField "summary" "content" -- Creates a $teaser$ field
-                        `mappend` bodyField "description" -- Creates a $description$ field (full body)
-                        `mappend` postCtx
+                        <> teaserField "summary" "content"
+                        <> bodyField "description"
+                        <> postCtx
             posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots "posts/*" "content"
             feedTpl <- loadBody "templates/my-atom.xml"
             itemTpl <- loadBody "templates/my-atom-item.xml"
             renderAtomWithTemplates feedTpl itemTpl feedConfiguration feedCtx posts
 
-    -- Render the Sitemap
     create ["sitemap.xml"] $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
-            let sitemapCtx =
-                    constField "domain" "https://cfmoon.net"
-                        `mappend` listField "posts" (postCtx `mappend` dateField "mDate" "%Y-%m-%d" `mappend` sitemapCtx) (return posts)
-            makeItem ""
+            let postSitemapCtx =
+                    constField "domain" siteRoot
+                        <> postCtx
+                        <> dateField "mDate" "%Y-%m-%d"
+                sitemapCtx =
+                    constField "domain" siteRoot
+                        <> listField "posts" postSitemapCtx (return posts)
+            makeItem ("" :: String)
                 >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
     match "templates/*" $ compile templateBodyCompiler
 
 cleanInnerUrls :: Item String -> Compiler (Item String)
-cleanInnerUrls = return . fmap (withUrls cleanIndex)
-  where
-    idx = "index.html"
-    cleanIndex url
-        | idx `isSuffixOf` url = take (length url - length idx) url
-        | otherwise = url
+cleanInnerUrls = return . fmap (withUrls cleanIndexUrl)
 
 cleanRoute :: Routes
 cleanRoute = customRoute createIndexRoute
   where
     createIndexRoute ident = takeBaseName (toFilePath ident) </> "index.html"
 
+cleanRobots :: Routes
 cleanRobots = customRoute createRobotsRoute
   where
-    createRobotsRoute id = takeFileName (toFilePath id)
+    createRobotsRoute ident = takeFileName (toFilePath ident)
 
--- Post list context
 postListCtx :: Context String -> Context String
 postListCtx customCtx =
     listField "posts" postCtx (recentFirst =<< loadAll "posts/*")
         <> customCtx
-
--- | Helper combinators - COMPOSITION HEAVEN
-makeArchive :: [Item String] -> Compiler (Item String)
-makeArchive posts =
-    let ctx =
-            listField "posts" postCtx (return posts)
-                `mappend` (constField "title" "The Archive" `mappend` mooneghanCtx)
-     in makeItem ""
-            >>= loadAndApplyTemplate "templates/archive.html" ctx
-            >>= loadAndApplyTemplate "templates/default.html" ctx
-
-applyDefaultTemplates :: Item String -> Compiler (Item String)
-applyDefaultTemplates =
-    loadAndApplyTemplate "templates/default.html" mooneghanCtx

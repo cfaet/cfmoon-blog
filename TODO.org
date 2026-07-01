@@ -1,0 +1,2 @@
+NOTE: Continue migration from ~/AllProjects/blog-chatgpt-first.
+Use diff -ur and delta

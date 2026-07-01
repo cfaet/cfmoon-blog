@@ -7,7 +7,7 @@
     </url>
     $for(posts)$
     <url>
-        <loc>$domain$$url$</loc>
+        <loc>$domain$$cleanUrl$</loc>
         <lastmod>$mDate$</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>

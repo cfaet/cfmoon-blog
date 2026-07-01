@@ -1,15 +1,53 @@
+html {
+	background: var(--site-bg);
+	scroll-behavior: smooth;
+}
+
 body {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	background:
+		linear-gradient(180deg, var(--site-bg) 0%, var(--site-bg-soft) 100%);
+	color: var(--site-text);
+	transition:
+		background-color var(--transition-base),
+		color var(--transition-base);
 }
+
 main {
 	flex: 1 0 auto;
+	padding-block: 2rem 4rem;
+}
+
+img,
+svg {
+	max-width: 100%;
+}
+
+::selection {
+	background: var(--site-accent-soft);
+	color: var(--site-text);
+}
+
+:focus-visible {
+	outline: 3px solid var(--site-focus);
+	outline-offset: 3px;
 }
 
 .general-title {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background: linear-gradient(135deg, var(--site-accent) 0%, var(--lucia-violet) 100%);
+	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	background-clip: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 1ms !important;
+		scroll-behavior: auto !important;
+		transition-duration: 1ms !important;
+	}
 }

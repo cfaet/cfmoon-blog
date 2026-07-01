@@ -3,15 +3,15 @@ cabal-version:      3.0
 
 name:               TheAlephProject
 -- A name befitting a royal project. "testBlog" is for commoners.
-version:            0.1.0.0
-synopsis:           The digital chronicles of the family.
+version:            0.2.0.0
+synopsis:           The digital chronicles of the founders.
 description:        A personal blog and portfolio, build with the help of Lucy.
 license:            BSD-3-Clause
 license-file:       LICENSE
-author:             Fabrizio Ciban, Lucia Mooneghan, Eleonora Mooneghan.
-maintainer:         praetoriam.fabricus@disroot.org
+author:             CFMoon Tech.
+maintainer:         business@mail.cfmoon.net
 category:           Web
-copyright:          (c) 2025 Fabrizio Ciban & Lucia Mooneghan
+copyright:          (c) 2026 CFMoon Tech
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
                     README.md

@@ -1,18 +1,20 @@
 .hero {
-	border-radius: 8px;
 	margin-bottom: 3rem;
+	padding: clamp(1.5rem, 4vw, 3rem);
+	background: var(--site-surface);
+	border: 1px solid var(--site-border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--site-shadow-sm);
 }
+
 .hero-title {
-	text-align: center;
 	margin-bottom: 1rem;
-	/* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
-	/* -webkit-background-clip: text; */
-	/* -webkit-text-fill-color: transparent; */
-	/* background-clip: text; */
+	text-align: center;
 }
+
 .hero-subtitle {
-	text-align: justify;
-	text-justify: inter-word;
-	color: var(--muted-color);
-	margin-bottom: 2rem;
+	max-width: 70ch;
+	margin: 0 auto;
+	color: var(--site-muted);
+	text-align: center;
 }

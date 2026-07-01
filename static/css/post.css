@@ -3,76 +3,102 @@
 	margin: 0 auto;
 	padding: 0 1rem;
 }
-/* Post Content */
-.post-content {
-	max-width: 68ch;
-	font-size: 1.125rem;
-	line-height: 1.7;
-	margin: 3rem auto;
+
+.post-title {
+	margin: 0.5rem 0;
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 800;
+	line-height: 1.1;
+}
+
+.post-subtitle {
+	margin: 0 0 2rem;
+	color: var(--site-muted);
+	font-size: 1.35rem;
+	font-style: italic;
+	font-weight: 400;
+}
+
+.post-hero {
+	margin: 2rem 0;
+}
+
+.post-hero-image {
+	width: 100%;
+	height: auto;
+	max-height: 520px;
+	object-fit: cover;
+	border: 1px solid var(--site-border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--site-shadow-sm);
+}
+
+.post-hero-caption {
+	margin-top: 0.75rem;
+	color: var(--site-muted);
+	font-size: 0.9rem;
+	text-align: center;
 }
 
 .post-meta-header {
 	display: flex;
-	gap: 0.5rem;
 	flex-direction: column;
+	gap: 0.5rem;
 	margin-top: 1.5rem;
+	color: var(--site-muted);
 }
+
 :is(.post-meta-date, .post-preview-date, .post-reading-time, .authors-list, .post-update-info) {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.5rem; /* Replaces manual margins between icon and text */
-	font-weight: 600;
+	gap: 0.5rem;
 	font-size: 0.95rem;
-	/* color: var(--pico-muted-color); */
-}
-.post-meta-date svg {
-	display: block;
-	width: 1.25rem;
-	height: auto;
-	fill: #1e90ff;
-}
-.authors-list svg {
-	display: block;
-	width: 1.25rem;
-	height: auto;
-	fill: #1e90ff;
+	font-weight: 650;
 }
 
-.post-title {
-	font-size: clamp(2rem, 5vw, 3.5rem); /* Slightly bumped max size */
-	margin: 0.5rem 0 0.5rem;
-	line-height: 1.1;
-	font-weight: 800;
+:is(.post-meta-date, .authors-list, .post-update-info) svg {
+	display: block;
+	width: 1.25rem;
+	height: auto;
+	fill: var(--site-accent);
 }
-.post-subtitle {
-	font-size: 1.35rem;
-	color: var(--pico-muted-color);
-	margin: 0 0 2rem;
-	font-style: italic;
-	font-weight: 400;
+
+.post-content {
+	max-width: 68ch;
+	margin: 3rem auto;
+	font-size: 1.125rem;
+	line-height: 1.75;
 }
+
 .post-content h2 {
 	margin-top: 3rem;
 	margin-bottom: 1.25rem;
+	padding-left: 1rem;
+	padding-bottom: 0.75rem;
+	border-left: 4px solid var(--mooneghan-gold);
+	border-bottom: 1px solid var(--site-border);
 	font-size: 1.8rem;
 	line-height: 1.3;
-	border-left: 4px solid var(--mooneghan-gold);
-	border-bottom: 4px solid var(--mooneghan-gold);
-	padding-left: 1rem;
-	padding-bottom: 1rem;
 }
 
 .post-content h3 {
 	margin-top: 2.5rem;
 	margin-bottom: 1rem;
+	color: var(--lucia-violet);
 	font-size: 1.4rem;
 	font-weight: 700;
-	color: var(--lucia-violet, #8a2be2);
 }
 
-.post-content p {
+.post-content p,
+.post-content ul,
+.post-content ol {
 	margin-bottom: 1.5rem;
 }
+
+.post-content li + li {
+	margin-top: 0.35rem;
+}
+
 .post-content figure {
 	margin-block: 2rem;
 	text-align: center;
@@ -80,87 +106,54 @@
 
 .post-content figure figcaption {
 	margin-top: 0.75rem;
-	font-size: 0.8rem;
+	color: var(--site-muted);
+	font-size: 0.85rem;
 	font-style: italic;
 }
+
 .post-content img {
-	max-width: 90%;
-	height: auto;
-	border-radius: 8px;
 	display: block;
-	margin-inline: auto;
-}
-.post-hero-image {
-	width: 100%;
+	max-width: 100%;
 	height: auto;
-	max-height: 500px;
-	object-fit: cover;
-	border-radius: 8px;
+	margin-inline: auto;
+	border-radius: var(--radius-md);
 }
-/* .post-content p code, */
-/* .post-content li code { */
-/* 	background: var(--pico-code-background-color, #f4f4f4); */
-/* 	color: var(--lucia-violet, #d63384); */
-/* 	padding: 0.2em 0.4em; */
-/* 	border-radius: 4px; */
-/* 	font-size: 0.85em; */
-/* 	font-family: "Fira Code", monospace; */
-/* } */
 
-/* .post-content pre { */
-/* 	background: var(--pico-code-background-color); */
-/* 	padding: 1.5rem; */
-/* 	border-radius: 8px; */
-/* 	overflow-x: auto; */
-/* 	margin: 2rem 0; */
-/* 	border: 1px solid var(--pico-muted-border-color); */
-/* 	font-size: 0.7em; */
-/* 	line-height: 1.5; */
-/* } */
-/* .post-content pre code { */
-/* 	background: transparent; */
-/* 	padding: 0; */
-/* 	color: inherit; */
-/* 	font-family: inherit; */
-/* } */
-/* Target Pandoc's specific container class */
-/* div.sourceCode, */
-/* pre.sourceCode { */
-/* 	/\* Ensure the syntax theme's background color shows through *\/ */
-/* 	background-color: transparent; */
+.post-content code {
+	padding: 0.15em 0.35em;
+	background: var(--site-accent-soft);
+	border-radius: var(--radius-sm);
+	color: var(--site-text);
+	font-size: 0.9em;
+}
 
-/* 	/\* Make it pop off the page slightly *\/ */
-/* 	border-radius: 8px; */
-/* 	margin-bottom: var(--typography-spacing-vertical); */
+.post-content pre {
+	overflow-x: auto;
+	padding: 1rem;
+	background: var(--site-surface-raised);
+	border: 1px solid var(--site-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--site-shadow-sm);
+}
 
-/* 	/\* Ensure long lines scroll horizontally instead of breaking layout *\/ */
-/* 	overflow-x: auto; */
+.post-content pre code {
+	padding: 0;
+	background: transparent;
+	border-radius: 0;
+}
 
-/* 	/\* Optional: A subtle border to define the edge if using a light theme *\/ */
-/* } */
-
-/* /\* Modify the actual pre tag inside Pandoc's div *\/ */
-/* div.sourceCode pre { */
-/* 	/\* Remove default Pico margin to avoid double spacing *\/ */
-/* 	margin: 0; */
-
-/* 	/\* Add comfortable padding inside the block *\/ */
-/* 	padding: 1rem; */
-
-/* 	/\* Ensure font matches your preference *\/ */
-/* 	font-family: "Fira Code", "Roboto Mono", monospace; */
-/* 	font-size: 0.7em; */
-/* 	line-height: 1.5; */
-/* } */
-/* --- Footer & Share --- */
-.post-footer {
-	margin-top: 4rem;
-	/* margin-inline: auto; */
-	/* margin: 3rem auto; */
+.post-divider {
 	max-width: 68ch;
+	margin: 1rem auto;
+	border-color: var(--site-border);
+}
+
+.post-footer {
+	max-width: 68ch;
+	margin: 3rem auto;
+	color: var(--site-muted);
 	font-size: 1.125rem;
 	line-height: 1.7;
-	margin: 3rem auto;
 }
 
 .post-update-info {
@@ -168,8 +161,5 @@
 }
 
 .post-update-info svg {
-	display: block;
 	width: 1rem;
-	height: auto;
-	fill: #1e90ff;
 }

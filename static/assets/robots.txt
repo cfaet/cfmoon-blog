@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://cfmoon.net/sitemap.xml
+Sitemap: $siteRoot$/sitemap.xml

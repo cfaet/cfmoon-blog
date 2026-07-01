@@ -1,10 +1,10 @@
-@import "footer.css";
-@import "header.css";
-@import "anchors.css";
+@import "variables.css";
 @import "body.css";
+@import "anchors.css";
+@import "header.css";
+@import "navigation.css";
 @import "feature-cards.css";
 @import "hero-titles.css";
-@import "variables.css";
-@import "navigation.css";
 @import "post.css";
 @import "post-list.css";
+@import "footer.css";

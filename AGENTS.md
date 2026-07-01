@@ -39,8 +39,3 @@ The executable is defined in `TheAlephProject.cabal` as `blog`.
   frontend conventions.
 - Validate Haskell changes with `just build` when practical.
 
-## Notes
-
-`CLAUDE.md` contains overlapping project guidance. If these files diverge,
-prefer the instructions in `AGENTS.md` for agent behavior and keep both files in
-sync when making durable workflow changes.

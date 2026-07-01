@@ -1,30 +1,108 @@
 .main-nav {
-	flex-grow: 1;
 	display: flex;
+	flex: 1 1 auto;
 	justify-content: flex-end;
 }
+
 .nav-list {
 	display: flex;
-	gap: 2rem;
-	list-style: none;
-	margin: 0;
-	/* padding: 0; */
 	align-items: center;
+	gap: 0.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
+
+.nav-link,
+.theme-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.5rem;
+	border-radius: var(--radius-md);
+	color: var(--site-header-text);
+	transition:
+		background-color var(--transition-fast),
+		border-color var(--transition-fast),
+		color var(--transition-fast),
+		transform var(--transition-fast);
+}
+
 .nav-link {
-	/* font-weight: 500; */
+	padding: 0.45rem 0.85rem;
+	font-weight: 650;
 	text-decoration: none;
-	position: relative;
-	/* transition: background-color 0.2s ease; */
-	transition: all 0.2s ease;
-	border-radius: 8px;
-	padding: 0.5rem 1rem;
-	/* display: block; */
 }
-.nav-link:hover {
-	background-color: rgba(255, 215, 0, 0.15);
+
+.nav-link:hover,
+.theme-toggle:hover {
+	background: rgba(255, 255, 255, 0.12);
+	color: #ffffff;
 }
-/* .nav-link:focus-visible { */
-/* 	outline: 2px solid var(--mooneghan-gold); */
-/* 	outline-offset: 2px; */
-/* } */
+
+.theme-toggle {
+	width: 2.5rem;
+	margin: 0;
+	padding: 0;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid var(--site-header-border);
+	cursor: pointer;
+}
+
+.theme-toggle:active {
+	transform: translateY(1px);
+}
+
+.theme-icon {
+	font-size: 1.25rem;
+	line-height: 1;
+}
+
+.theme-icon-light {
+	display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-light {
+	display: inline-block;
+}
+
+:root[data-theme="dark"] .theme-icon-dark {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.main-nav .nav-list {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		left: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.75rem;
+		padding: 1rem;
+		background: var(--site-header-bg);
+		border-bottom: 1px solid var(--site-header-border);
+		box-shadow: var(--site-shadow-md);
+		transform: scaleY(0.98) translateY(-0.5rem);
+		transform-origin: top;
+		opacity: 0;
+		visibility: hidden;
+		transition:
+			opacity var(--transition-base),
+			transform var(--transition-base),
+			visibility var(--transition-base);
+	}
+
+	.main-nav.is-open .nav-list {
+		transform: scaleY(1) translateY(0);
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.nav-link,
+	.theme-toggle {
+		width: 100%;
+		justify-content: center;
+	}
+}

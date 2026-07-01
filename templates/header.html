@@ -79,20 +79,17 @@
 			</button>
 			<ul class="nav-list">
 				<li><a href="/musings" class="nav-link">Musings</a></li>
+				<li>
+					<button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+						<span class="material-symbols-outlined theme-icon theme-icon-light" aria-hidden="true">
+							light_mode
+						</span>
+						<span class="material-symbols-outlined theme-icon theme-icon-dark" aria-hidden="true">
+							dark_mode
+						</span>
+					</button>
+				</li>
 			</ul>
 		</nav>
 	</div>
-	<script>
-		// Pure, simple, minimal state mutation.
-		// Catrin Approval Factor: 100%
-		const navToggle = document.querySelector(".nav-toggle");
-		const mainNav = document.querySelector(".main-nav");
-
-		navToggle.addEventListener("click", () => {
-			const isOpen = mainNav.classList.toggle("is-open");
-			navToggle.classList.toggle("is-active"); // Toggles icon state
-			navToggle.setAttribute("aria-expanded", isOpen);
-			navToggle.setAttribute("aria-label", isOpen ? "Close main menu" : "Open main menu");
-		});
-	</script>
 </header>
