@@ -1,0 +1,9 @@
+<entry>
+    <title>$title$</title>
+    <link href="$root$$url$" />
+    <id>$root$$url$</id>
+    <published>$published$</published>
+    <updated>$updated$</updated>
+    <summary type="html"><![CDATA[$summary$]]></summary>
+    <content type="html"><![CDATA[$description$]]></content>
+</entry>

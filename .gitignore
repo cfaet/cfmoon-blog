@@ -1,0 +1,23 @@
+# Cabal build artifacts
+dist-newstyle/
+cabal.project.local
+_site/
+_cache/
+# Common editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Nix artifacts
+result
+.direnv/
+*.lock
+.wrangler
+image-edits/
+
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+.wrangler/

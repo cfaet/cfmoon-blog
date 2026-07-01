@@ -1,0 +1,116 @@
+.site-header {
+	padding: 0;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	background: linear-gradient(135deg, var(--fabrizio-blue) 0%, #2244a1 100%);
+	/* border-bottom: 1px solid var(--pico-muted-border-color); */
+}
+
+.header-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	gap: 2rem;
+}
+.site-branding {
+	flex-shrink: 0;
+	z-index: 1001;
+}
+.site-logo {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	transition: transform 0.2s ease-in-out;
+}
+.site-logo:hover {
+	transform: scale(1.05);
+}
+.nav-toggle {
+	display: none; /* Hidden on desktop */
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+	color: cyan; /* Icon color */
+	transition: transform 0.2s ease;
+}
+.nav-toggle:hover {
+	transform: scale(1.1);
+}
+.nav-icon {
+	width: 32px;
+	height: 32px;
+	display: block; /* Removes SVG gap issues */
+}
+/* Logic: Show Menu by default, hide Close */
+.nav-toggle .icon-close {
+	display: none;
+}
+
+/* Logic: When active, hide Menu, show Close */
+.nav-toggle.is-active .icon-menu {
+	display: none;
+}
+.nav-toggle.is-active .icon-close {
+	display: block;
+}
+
+@media (max-width: 768px) {
+	.nav-toggle {
+		display: block; /* Show the button on mobile */
+	}
+	.main-nav .nav-list {
+		/* display: none; */
+		/* position: absolute; */
+		/* top: 100%; */
+		/* left: 0; */
+		/* right: 0; */
+		/* flex-direction: column; */
+		/* background-color: var(--fabrizio-blue); */
+		/* padding: 1rem; */
+		/* margin-right: 0; */
+		/* /\* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); *\/ */
+		/* gap: 1rem; */
+		display: flex; /* Keep it flex, but hide via transform/opacity */
+		flex-direction: column;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background-color: var(--fabrizio-blue); /* Slightly transparent */
+		backdrop-filter: blur(10px); /* The Sci-Fi touch */
+		padding: 1rem;
+		/* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); */
+		gap: 1rem;
+
+		/* Animation Base State */
+		transform-origin: top;
+		transform: scaleY(0);
+		opacity: 0;
+		transition:
+			transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.2s ease;
+		visibility: hidden; /* Accessibility */
+	}
+	.main-nav.is-open .nav-list {
+		/* Animation Active State */
+		transform: scaleY(1);
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.site-logo {
+		max-width: 250px;
+	}
+}
+/* @media (max-width: 480px) { */
+/* 	.site-logo { */
+/* 		max-width: 180px; */
+/* 	} */
+/* 	.main-nav { */
+/* 		flex-direction: column; */
+/* 		align-items: center; */
+/* 	} */
+/* } */

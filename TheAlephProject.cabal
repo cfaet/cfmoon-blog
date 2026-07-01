@@ -1,0 +1,42 @@
+cabal-version:      3.0
+-- Cabal specification version 3.0 allows for more modern and robust features.
+
+name:               TheAlephProject
+-- A name befitting a royal project. "testBlog" is for commoners.
+version:            0.1.0.0
+synopsis:           The digital chronicles of the family.
+description:        A personal blog and portfolio, build with the help of Lucy.
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Fabrizio Ciban, Lucia Mooneghan, Eleonora Mooneghan.
+maintainer:         praetoriam.fabricus@disroot.org
+category:           Web
+copyright:          (c) 2025 Fabrizio Ciban & Lucia Mooneghan
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+                    README.md
+
+common warnings
+    ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+-- This executable is our site generator.
+executable blog
+    import:           warnings
+    main-is:          Main.hs
+    other-modules:    Mooneghan.Contexts
+    -- Other modules will be where our logic resides.
+ --   other-modules:    Compiler
+ --                   , Templates
+ --                   , Context
+    -- LANGUAGE extensions for modern Haskell features.
+    other-extensions: OverloadedStrings
+                    , ScopedTypeVariables
+    build-depends:    base >= 4.16 && < 5,
+                      hakyll >= 4.15 && < 4.16.6,
+                      pandoc >= 2.19 && < 3.2,
+                      blaze-html >= 0.9 && < 1,
+                      containers >= 0.6 && < 0.7,
+                      filepath >= 1.4 && < 1.5,
+                      text >= 2 && < 2.2
+    hs-source-dirs:   src
+    default-language: Haskell2010

@@ -1,0 +1,16 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"name": "tap-blog",
+	"compatibility_date": "2026-07-01",
+	"assets": {
+		// The path to the directory containing the `index.html` file to be served at `/`
+		"directory": "./_site"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+}

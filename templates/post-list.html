@@ -1,0 +1,46 @@
+<section class="recent-posts" aria-labelledby="recent-posts-heading">
+	<h2 id="recent-posts-heading">$post-list-heading$</h2>
+	<div class="post-list">
+		$for(posts)$
+		<article class="post-preview" itemscope itemtype="http://schema.org/BlogPosting">
+			$if(image)$
+			<div class="post-preview-image-wrapper">
+				<img
+					src="$image$"
+					alt="$imageAlt$"
+					class="post-preview-image"
+					itemprop="image"
+					loading="lazy"
+					width="auto"
+					height="250"
+				/>
+			</div>
+			$else$
+			<div class="post-preview-image-wrapper post-preview-placeholder">
+				<span class="material-symbols-outlined" aria-label="Article icon">article</span>
+			</div>
+			$endif$
+
+			<div class="post-preview-content">
+				<header class="post-preview-header">
+					<h3 class="post-preview-title" itemprop="headline">
+						<a href="$url$" itemprop="url">$title$</a>
+					</h3>
+					$if(subtitle)$
+					<p class="post-preview-subtitle" itemprop="alternativeHeadline">$subtitle$</p>
+					$endif$
+				</header>
+				<div class="post-authors-preview">$partial("templates/post-authors.html")$</div>
+				<div class="post-preview-date">
+					$if(date)$ $partial("templates/post-date.html")$ $endif$ $if(readingTime)$
+					<span class="post-preview-reading-time">
+						<span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+						$readingTime$ min read
+					</span>
+					$endif$
+				</div>
+			</div>
+		</article>
+		$endfor$
+	</div>
+</section>

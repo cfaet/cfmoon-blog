@@ -1,0 +1,23 @@
+<!-- templates/philosophy.html -->
+<article class="philosophy">
+    <header class="philosophy-header">
+        <h1>$title$</h1>
+        <div class="meta">
+            <span class="thinker">Pondered by: $author$</span>
+            <span class="date">$date$</span>
+        </div>
+    </header>
+    
+    <div class="philosophy-content">
+        $body$
+    </div>
+    
+    <footer class="philosophy-footer">
+        <div class="tags">
+            $if(tags)$
+                Topics: $tags$
+            $endif$
+        </div>
+        <div class="bite-signature" title="Lucia was here"></div>
+    </footer>
+</article>

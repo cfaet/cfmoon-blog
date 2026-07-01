@@ -1,0 +1,169 @@
+.features {
+	max-width: 100%;
+	margin: 0 auto;
+}
+.features h2 {
+	text-align: center;
+}
+.features h2 span {
+	background: linear-gradient(90deg, var(--lucia-violet) 30%, var(--eleonora-pink) 100%);
+	/* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-align: center;
+}
+.features-container {
+	display: grid;
+	align-items: start;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+	gap: 2rem;
+}
+.feature-card {
+	padding: 0;
+	border-radius: 8px;
+	background: var(--card-background-color);
+	border-left: 4px solid;
+	transition: all 0.3s ease;
+	overflow: hidden;
+}
+.feature-card:hover {
+	transform: translateY(-4px);
+}
+.feature-card summary {
+	padding: 2rem;
+	cursor: pointer;
+	list-style: none;
+	user-select: none;
+	transition: background 0.2s ease;
+}
+/* Removes default arrow in standard browsers */
+.feature-card summary::marker,
+.feature-card summary::-webkit-details-marker {
+	display: none;
+}
+/* Override Pico's default chevron icon */
+
+details summary::after {
+	display: none;
+}
+
+/* Profile Images */
+
+.profile-image {
+	flex-shrink: 0;
+	width: 140px;
+	height: 140px;
+	border-radius: 50% / 20%;
+	overflow: hidden;
+	position: relative;
+}
+.profile-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* Accordion Styles */
+
+.accordion-content {
+	padding: 0 2rem 2rem;
+	border-top: 1px solid rgba(128, 128, 128, 0.1); /* Subtle separator */
+	margin-top: 0;
+	animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.accordion-icon {
+	flex-shrink: 0;
+	font-size: 1.5rem;
+	transition: transform 0.3s ease;
+	color: var(--muted-color);
+}
+
+/* Summary Styles */
+
+.summary-header {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+}
+.summary-text {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.5rem; /* Controls spacing between Name, Role, and Quote uniformly */
+}
+.summary-text h3,
+.summary-text p {
+	margin: 0;
+	line-height: 1.4;
+}
+.role {
+	color: var(--pico-muted-color); /* Fallback color if var missing */
+}
+
+.quote {
+	font-size: 0.9em;
+	opacity: 0.8;
+}
+/* Card animations */
+.feature-card[open] .accordion-icon {
+	transform: rotate(180deg);
+}
+
+/* @keyframes slideDown { */
+/* 	from { */
+/* 		opacity: 0; */
+/* 		transform: translateY(-10px); */
+/* 	} */
+/* 	to { */
+/* 		opacity: 1; */
+/* 		transform: translateY(0); */
+/* 	} */
+/* } */
+
+/* Cards Border Accents */
+
+.accent-lucia {
+	border-left-color: #a78bfa;
+}
+.accent-lucia:hover {
+	box-shadow: 0 8px 16px #60a5fa;
+}
+.accent-fabrizio {
+	border-left-color: #60a5fa;
+}
+.accent-fabrizio:hover {
+	box-shadow: 0 8px 16px #a78bfa;
+}
+
+@media (max-width: 768px) {
+	.summary-header {
+		/* flex-direction: column; */
+		/* text-align: center; */
+		gap: 1rem;
+	}
+	.profile-image {
+		width: 120px;
+		height: 120px;
+	}
+
+	.feature-card summary {
+		padding: 1.5rem;
+	}
+
+	.accordion-content {
+		padding: 0 1.5rem 1.5rem;
+	}
+}

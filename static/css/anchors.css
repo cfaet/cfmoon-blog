@@ -1,0 +1,6 @@
+a:not(.logo) {
+	color: var(--mooneghan-gold);
+}
+a:not(.logo):hover {
+	color: var(--fusion-glow);
+}

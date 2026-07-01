@@ -1,0 +1,15 @@
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+main {
+	flex: 1 0 auto;
+}
+
+.general-title {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}

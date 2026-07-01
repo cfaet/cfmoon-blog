@@ -1,0 +1,27 @@
+<!-- templates/recipe.html -->
+<article class="recipe">
+    <header class="recipe-header">
+        <h1>$title$</h1>
+        <div class="recipe-meta">
+            <span>From the Mooneghan Cookbook</span>
+            <span>Served with: 💛 Love & Nuclear Fusion</span>
+        </div>
+    </header>
+    
+    <div class="recipe-content">
+        <div class="ingredients">
+            $ingredients$
+        </div>
+        <div class="instructions">
+            $body$
+        </div>
+    </div>
+    
+    <footer class="recipe-footer">
+        <p class="family-note">
+            $if(familyNote)$
+                📝 Family Note: $familyNote$
+            $endif$
+        </p>
+    </footer>
+</article>

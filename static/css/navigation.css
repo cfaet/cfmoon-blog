@@ -1,0 +1,30 @@
+.main-nav {
+	flex-grow: 1;
+	display: flex;
+	justify-content: flex-end;
+}
+.nav-list {
+	display: flex;
+	gap: 2rem;
+	list-style: none;
+	margin: 0;
+	/* padding: 0; */
+	align-items: center;
+}
+.nav-link {
+	/* font-weight: 500; */
+	text-decoration: none;
+	position: relative;
+	/* transition: background-color 0.2s ease; */
+	transition: all 0.2s ease;
+	border-radius: 8px;
+	padding: 0.5rem 1rem;
+	/* display: block; */
+}
+.nav-link:hover {
+	background-color: rgba(255, 215, 0, 0.15);
+}
+/* .nav-link:focus-visible { */
+/* 	outline: 2px solid var(--mooneghan-gold); */
+/* 	outline-offset: 2px; */
+/* } */

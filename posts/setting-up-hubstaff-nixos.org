@@ -1,0 +1,78 @@
+---
+title: Setting up HubStaff on NixOS
+subtitle: Somebody's watching me!
+date: 2025-12-16
+authors: Fabrizio & Catrin
+tags: [writing, story, biography]
+image: ../static/images/fifth-try.png
+imageAlt: Hero shot, a picture depicting multiple energy balls joined by threads of light, representing each soul's place in the universe.
+---
+
+* Can't I have some privacy?
+In the modern world, probably no.
+#+begin_export html
+<!--more-->
+#+end_export
+I recently started a remote gig and the company asked me to set up
+HubStaff or my hours would not count.
+So what is Hubstaff? It's essentially a monitoring and time-tracking tool that +spies+
+tracks your actions to see if you're working as intended. They claim
+not to perform keystroke logging, access the camera or monitor your
+email, but since the software is proprietary, more digging is required.
+
+** Is it safe?
+Personally, I'm still evaluating its safety and whether it really
+respects some of your privacy at least, but someone with more time and
+expertise should do this, and there's probably articles about its
+safety as Hubstaff (both the company and the software) are not really
+recent, it was established in 2012 according to Wikipedia.
+* Under this pressure, under this weight
+Indeed, I installed. But my OS was not a common one, and at first
+thought I expected it to be Windows only, but surprisingly, they have
+builds for Mac and Linux. From what I could gather, Hubstaff is
+written in C++, making it portable indeed. So which system do I use?
+NixOS, a very niche but highly technical OS for fans of reproducible
+builds and functional programming nerds (like me), this actually gives
+NixOS an edge as its used by very capable people, and often very
+knowledgeable, experienced engineers and specialists.
+** Is it available?
+Yes, it's available on NixOS, and you don't need to do any manual building,
+porting or patching, as the NixOS contributors already packaged it,
+
+~Be aware that you need the unstable NixOS version, 26.05~
+
+- You can either run it via nix-shell or nix shell (flake-based)
+#+begin_src sh
+  nix-shell -p hubstaff
+  HubstaffClient # Yes, this is the actual exe name
+#+end_src
+#+begin_src sh
+  nix shell nixpkgs#hubstaff
+  HubstaffClient # Yes, this is the actual exe name
+#+end_src
+
+You can also install it by adding it to your package list, via
+home-manager or otherwise.
+
+~Be aware, you'll need to enable unfree software to install Hubstaff~
+
+#+begin_src nix
+  {pkgs, ...}:
+  nixpkgs.config.allowUnfree
+  enviroment.systemPackages = with pkgs; [
+    hubstaff
+  ]
+#+end_src
+
+
+#+begin_src nix
+  {pkgs, ...}:
+  enviroment.systemPackages = with pkgs; [
+    hubstaff
+  ]
+#+end_src
+
+
+
+
+

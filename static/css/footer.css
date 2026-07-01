@@ -1,0 +1,38 @@
+footer .footer-content {
+	display: flex;
+	flex-direction: row; /* This is what stacks them */
+	align-items: flex-start; /* This is what centers them */
+	text-align: justify;
+	justify-content: space-between;
+	gap: 1.5rem; /* Breathing room between elements */
+	padding: 2rem 0;
+}
+.footer-credit {
+	text-align: left;
+}
+.footer-extras {
+	text-align: center;
+}
+footer .social-icons ul {
+	list-style: none;
+	display: flex;
+	gap: 1rem;
+	/* margin: 1rem 0 */
+}
+.social-icons svg {
+	width: 32px; /* Icon width */
+	height: 32px; /* Icon height */
+	fill: currentColor; /* Inherits the color from the parent link */
+	transition: fill 0.3s ease; /* Smooth hover effect */
+}
+@media (max-width: 1024px) {
+	footer .footer-content {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		align-items: center;
+	}
+	footer .footer-credit {
+		text-align: center;
+	}
+}
