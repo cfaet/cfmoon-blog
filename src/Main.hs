@@ -14,7 +14,7 @@ feedConfiguration =
         { feedTitle = "The Aleph Project"
         , feedDescription = "Musings on software and life."
         , feedAuthorName = "CFMoon Tech"
-        , feedAuthorEmail = "business@mail.cfmoon.net"
+        , feedAuthorEmail = "fabricus@cfmoon.net"
         , feedRoot = siteRoot
         }
 

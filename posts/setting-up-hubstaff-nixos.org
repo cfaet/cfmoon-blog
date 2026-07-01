@@ -1,5 +1,5 @@
 ---
-title: Setting up HubStaff on NixOS
+title: Setting up Hubstaff on NixOS
 subtitle: Somebody's watching me!
 date: 2025-12-16
 authors: Fabrizio & Catrin
@@ -9,70 +9,83 @@ imageAlt: Hero shot, a picture depicting multiple energy balls joined by threads
 ---
 
 * Can't I have some privacy?
-In the modern world, probably no.
+In the modern world, probably not.
 #+begin_export html
 <!--more-->
 #+end_export
 I recently started a remote gig and the company asked me to set up
-HubStaff or my hours would not count.
+Hubstaff or my hours would not be counted.
 So what is Hubstaff? It's essentially a monitoring and time-tracking tool that +spies+
 tracks your actions to see if you're working as intended. They claim
-not to perform keystroke logging, access the camera or monitor your
-email, but since the software is proprietary, more digging is required.
+not to perform keystroke logging, access your camera, or monitor your
+email, but since the software is proprietary, it deserves more scrutiny.
 
 ** Is it safe?
 Personally, I'm still evaluating its safety and whether it really
-respects some of your privacy at least, but someone with more time and
-expertise should do this, and there's probably articles about its
-safety as Hubstaff (both the company and the software) are not really
-recent, it was established in 2012 according to Wikipedia.
+respects at least some of your privacy, but someone with more time and
+expertise should do this, and there are probably articles about its
+safety, since Hubstaff (both the company and the software) is not exactly
+new; it was established in 2012, according to Wikipedia.
 * Under this pressure, under this weight
-Indeed, I installed. But my OS was not a common one, and at first
-thought I expected it to be Windows only, but surprisingly, they have
-builds for Mac and Linux. From what I could gather, Hubstaff is
-written in C++, making it portable indeed. So which system do I use?
+So I installed it. But my OS was not a common one, and at first
+I expected it to be Windows-only. Surprisingly, they have
+builds for macOS and Linux. From what I could gather, Hubstaff is
+written in C++, which makes it portable. So which system do I use?
 NixOS, a very niche but highly technical OS for fans of reproducible
-builds and functional programming nerds (like me), this actually gives
-NixOS an edge as its used by very capable people, and often very
+builds and functional programming nerds (like me). This actually gives
+NixOS an edge, as it's used by very capable people, and often by very
 knowledgeable, experienced engineers and specialists.
 ** Is it available?
 Yes, it's available on NixOS, and you don't need to do any manual building,
-porting or patching, as the NixOS contributors already packaged it,
-
-~Be aware that you need the unstable NixOS version, 26.05~
+porting, or patching, as the NixOS contributors have already packaged it.
 
 - You can either run it via nix-shell or nix shell (flake-based)
-#+begin_src sh
+  #+begin_src sh
+  # classic
   nix-shell -p hubstaff
   HubstaffClient # Yes, this is the actual exe name
-#+end_src
-#+begin_src sh
+  #+end_src
+  #+begin_src sh
+  # flakes
   nix shell nixpkgs#hubstaff
   HubstaffClient # Yes, this is the actual exe name
-#+end_src
+  #+end_src
 
-You can also install it by adding it to your package list, via
-home-manager or otherwise.
+- You can also install it by adding it to your package list:
+  #+begin_src nix
+    { pkgs, lib, ... }:
+    {
+      # Infamous unfree predicate
+      nixpkgs.config.allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) [
+          "hubstaff"
+        ];
+      environment.systemPackages = with pkgs; [
+        hubstaff
+      ];
+    }
+  #+end_src
 
-~Be aware, you'll need to enable unfree software to install Hubstaff~
+- If you're running the ~nixos-unstable~ channel, you can just use the newer
+  ~allowUnfreePackages~:
+  #+begin_src nix
+    { pkgs, ... }:
+    {
+      nixpkgs.config.allowUnfreePackages = [
+        "hubstaff"
+      ];
+      environment.systemPackages = with pkgs; [
+        hubstaff
+      ];
+    }
+  #+end_src
+* Final Thoughts
+This might be unrelated, but I realised that big companies are
+becoming more controlling, and the task I had to do was AI-related. I
+have since stopped the tasks, not because I dislike AI, but because
+the job itself was tedious, the pay was meagre and took two weeks to
+arrive, and to make it all worse, the platform would crash every few
+days due to an overload of task workers.
 
-#+begin_src nix
-  {pkgs, ...}:
-  nixpkgs.config.allowUnfree
-  enviroment.systemPackages = with pkgs; [
-    hubstaff
-  ]
-#+end_src
-
-
-#+begin_src nix
-  {pkgs, ...}:
-  enviroment.systemPackages = with pkgs; [
-    hubstaff
-  ]
-#+end_src
-
-
-
-
-
+My advice is not to get lured by these data-labelling and AI training
+gigs; a lot of them are severely improvised.

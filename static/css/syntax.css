@@ -2,59 +2,228 @@ pre > code.sourceCode {
 	white-space: pre;
 	position: relative;
 }
+
 pre > code.sourceCode > span {
 	display: inline-block;
 	line-height: 1.25;
 }
+
 pre > code.sourceCode > span:empty {
 	height: 1.2em;
 }
+
 code.sourceCode > span {
 	color: inherit;
 	text-decoration: inherit;
 }
-div.sourceCode {
-	margin: 1em 0;
-	/* CHANGE THIS: Give it a dark background to match the Zenburn theme */
-	background-color: #3f3f3f;
-	/* Keep your existing nice formatting */
-	border-radius: 8px;
-	overflow-x: auto;
 
-	/* Optional: Add a subtle border to separate it from the page *
-	border: 1px solid #4f4f4f;
+div.sourceCode {
+	--code-bg: #f8fafc;
+	--code-text: #1f2937;
+	--code-border: #cbd5e1;
+	--code-button-bg: rgba(255, 255, 255, 0.92);
+	--code-button-hover-bg: #ffffff;
+	--code-line-anchor: #64748b;
+	--code-alert: #9f1239;
+	--code-annotation: #166534;
+	--code-base-n: #9a3412;
+	--code-built-in: #075985;
+	--code-control-flow: #7e22ce;
+	--code-char: #9a3412;
+	--code-constant: #7c2d12;
+	--code-comment: #596779;
+	--code-comment-var: #166534;
+	--code-doc: #166534;
+	--code-data-type: #1d4ed8;
+	--code-dec-val: #b45309;
+	--code-error: #b91c1c;
+	--code-float: #b45309;
+	--code-function: #047857;
+	--code-info: #166534;
+	--code-keyword: #7e22ce;
+	--code-operator: #0f766e;
+	--code-other: #4338ca;
+	--code-preprocessor: #9f1239;
+	--code-special-char: #9a3412;
+	--code-special-string: #854d0e;
+	--code-string: #854d0e;
+	--code-variable-string: #9f1239;
+	--code-warning: #166534;
+
+	margin: 1em 0;
+	background-color: var(--code-bg);
+	border: 1px solid var(--code-border);
+	border-radius: 8px;
+	box-shadow: var(--site-shadow-sm);
+	overflow-x: auto;
+	position: relative;
 }
-/* Add this to ensure the inner text has some breathing room */
+
+:root[data-theme="dark"] div.sourceCode {
+	--code-bg: #1f2937;
+	--code-text: #f5f5dc;
+	--code-border: #374151;
+	--code-button-bg: rgba(17, 24, 39, 0.9);
+	--code-button-hover-bg: #111827;
+	--code-line-anchor: #9ca3af;
+	--code-alert: #ffcfaf;
+	--code-annotation: #9ece9e;
+	--code-base-n: #dca3a3;
+	--code-built-in: #fbbf24;
+	--code-control-flow: #f87171;
+	--code-char: #dca3a3;
+	--code-constant: #dca3a3;
+	--code-comment: #b8bec8;
+	--code-comment-var: #9ece9e;
+	--code-doc: #9ece9e;
+	--code-data-type: #dfdfbf;
+	--code-dec-val: #e9a8ff;
+	--code-error: #f5d78e;
+	--code-float: #c0bed1;
+	--code-function: #86efac;
+	--code-info: #9ece9e;
+	--code-keyword: #f87171;
+	--code-operator: #7dd3fc;
+	--code-other: #efef8f;
+	--code-preprocessor: #ffcfaf;
+	--code-special-char: #dca3a3;
+	--code-special-string: #efef8f;
+	--code-string: #efef8f;
+	--code-variable-string: #f0a8a8;
+	--code-warning: #9ece9e;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) div.sourceCode {
+		--code-bg: #1f2937;
+		--code-text: #f5f5dc;
+		--code-border: #374151;
+		--code-button-bg: rgba(17, 24, 39, 0.9);
+		--code-button-hover-bg: #111827;
+		--code-line-anchor: #9ca3af;
+		--code-alert: #ffcfaf;
+		--code-annotation: #9ece9e;
+		--code-base-n: #dca3a3;
+		--code-built-in: #fbbf24;
+		--code-control-flow: #f87171;
+		--code-char: #dca3a3;
+		--code-constant: #dca3a3;
+		--code-comment: #b8bec8;
+		--code-comment-var: #9ece9e;
+		--code-doc: #9ece9e;
+		--code-data-type: #dfdfbf;
+		--code-dec-val: #e9a8ff;
+		--code-error: #f5d78e;
+		--code-float: #c0bed1;
+		--code-function: #86efac;
+		--code-info: #9ece9e;
+		--code-keyword: #f87171;
+		--code-operator: #7dd3fc;
+		--code-other: #efef8f;
+		--code-preprocessor: #ffcfaf;
+		--code-special-char: #dca3a3;
+		--code-special-string: #efef8f;
+		--code-string: #efef8f;
+		--code-variable-string: #f0a8a8;
+		--code-warning: #9ece9e;
+	}
+}
+
 div.sourceCode pre {
 	margin: 0;
 	padding: 1rem;
-	font-family: "JetBrains Mono", "Roboto Mono", monospace; /* or your preferred font */
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	font-family: "JetBrains Mono", "Roboto Mono", monospace;
 }
+
+div.sourceCode[data-copy-ready="true"] pre {
+	padding-top: 3rem;
+}
+
+.code-copy-button {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 4.25rem;
+	min-height: 2rem;
+	margin: 0;
+	padding: 0.25rem 0.7rem;
+	background: var(--code-button-bg);
+	border: 1px solid var(--code-border);
+	border-radius: var(--radius-sm);
+	color: var(--code-text);
+	font: inherit;
+	font-size: 0.75rem;
+	font-weight: 700;
+	line-height: 1;
+	cursor: pointer;
+	transition:
+		background-color var(--transition-fast),
+		border-color var(--transition-fast),
+		color var(--transition-fast),
+		transform var(--transition-fast);
+}
+
+.code-copy-button:hover {
+	background: var(--code-button-hover-bg);
+}
+
+.code-copy-button:focus-visible {
+	outline: 2px solid var(--site-focus);
+	outline-offset: 2px;
+}
+
+.code-copy-button:active {
+	transform: translateY(1px);
+}
+
+.code-copy-button[data-copy-state="success"] {
+	border-color: var(--code-function);
+	color: var(--code-function);
+}
+
+.code-copy-button[data-copy-state="error"] {
+	border-color: var(--code-error);
+	color: var(--code-error);
+}
+
 pre.sourceCode {
 	margin: 0;
 }
+
 @media screen {
 	div.sourceCode {
 		overflow: auto;
 	}
 }
+
 @media print {
 	pre > code.sourceCode {
 		white-space: pre-wrap;
 	}
+
 	pre > code.sourceCode > span {
 		text-indent: -5em;
 		padding-left: 5em;
 	}
 }
+
 pre.numberSource code {
 	counter-reset: source-line 0;
 }
+
 pre.numberSource code > span {
 	position: relative;
 	left: -4em;
 	counter-increment: source-line;
 }
+
 pre.numberSource code > span > a:first-child::before {
 	content: counter(source-line);
 	position: relative;
@@ -71,106 +240,127 @@ pre.numberSource code > span > a:first-child::before {
 	user-select: none;
 	padding: 0 4px;
 	width: 4em;
+	color: var(--code-line-anchor);
 }
+
 pre.numberSource {
 	margin-left: 3em;
 	padding-left: 4px;
 }
+
 @media screen {
 	pre > code.sourceCode > span > a:first-child::before {
 		text-decoration: underline;
 	}
 }
+
 .sourceCode {
-	color: beige;
+	color: var(--code-text);
 	font-size: 0.9em;
 }
-code span.al {
-	color: #ffcfaf;
-} /* Alert */
-code span.an {
-	color: #7f9f7f;
+
+.sourceCode span.al {
+	color: var(--code-alert);
+}
+
+.sourceCode span.an {
+	color: var(--code-annotation);
 	font-weight: bold;
-} /* Annotation */
-code span.at {
-} /* Attribute */
-code span.bn {
-	color: #dca3a3;
-} /* BaseN */
-code span.bu {
-	color: orange;
-} /* BuiltIn */
-code span.cf {
-	color: red;
-} /* ControlFlow */
-code span.ch {
-	color: #dca3a3;
-} /* Char */
-code span.cn {
-	color: #dca3a3;
+}
+
+.sourceCode span.bn {
+	color: var(--code-base-n);
+}
+
+.sourceCode span.bu {
+	color: var(--code-built-in);
+}
+
+.sourceCode span.cf {
+	color: var(--code-control-flow);
+}
+
+.sourceCode span.ch {
+	color: var(--code-char);
+}
+
+.sourceCode span.cn {
+	color: var(--code-constant);
 	font-weight: bold;
-} /* Constant */
-code span.co {
-	color: #989898;
-} /* Comment */
-code span.cv {
-	color: #7f9f7f;
+}
+
+.sourceCode span.co {
+	color: var(--code-comment);
+}
+
+.sourceCode span.cv {
+	color: var(--code-comment-var);
 	font-weight: bold;
-} /* CommentVar */
-code span.do {
-	color: #7f9f7f;
-} /* Documentation */
-code span.dt {
-	color: #dfdfbf;
-} /* DataType */
-code span.dv {
-	color: violet;
-} /* DecVal */
-code span.er {
-	color: #c3bf9f;
-} /* Error */
-code span.ex {
-} /* Extension */
-code span.fl {
-	color: #c0bed1;
-} /* Float */
-code span.fu {
-	color: #3cb371;
-} /* Function */
-code span.im {
-} /* Import */
-code span.in {
-	color: #7f9f7f;
+}
+
+.sourceCode span.do {
+	color: var(--code-doc);
+}
+
+.sourceCode span.dt {
+	color: var(--code-data-type);
+}
+
+.sourceCode span.dv {
+	color: var(--code-dec-val);
+}
+
+.sourceCode span.er {
+	color: var(--code-error);
+}
+
+.sourceCode span.fl {
+	color: var(--code-float);
+}
+
+.sourceCode span.fu {
+	color: var(--code-function);
+}
+
+.sourceCode span.in {
+	color: var(--code-info);
 	font-weight: bold;
-} /* Information */
-code span.kw {
-	color: red;
-} /* Keyword */
-code span.op {
-	color: skyblue;
-} /* Operator */
-code span.ot {
-	color: #efef8f;
-} /* Other */
-code span.pp {
-	color: #ffcfaf;
+}
+
+.sourceCode span.kw {
+	color: var(--code-keyword);
+}
+
+.sourceCode span.op {
+	color: var(--code-operator);
+}
+
+.sourceCode span.ot {
+	color: var(--code-other);
+}
+
+.sourceCode span.pp {
+	color: var(--code-preprocessor);
 	font-weight: bold;
-} /* Preprocessor */
-code span.sc {
-	color: #dca3a3;
-} /* SpecialChar */
-code span.ss {
-	color: #efef8f;
-} /* SpecialString */
-code span.st {
-	color: #efef8f;
-} /* String */
-code span.va {
-} /* Variable */
-code span.vs {
-	color: #cc9393;
-} /* VerbatimString */
-code span.wa {
-	color: #7f9f7f;
+}
+
+.sourceCode span.sc {
+	color: var(--code-special-char);
+}
+
+.sourceCode span.ss {
+	color: var(--code-special-string);
+}
+
+.sourceCode span.st {
+	color: var(--code-string);
+}
+
+.sourceCode span.vs {
+	color: var(--code-variable-string);
+}
+
+.sourceCode span.wa {
+	color: var(--code-warning);
 	font-weight: bold;
 }

@@ -64,4 +64,77 @@ document.addEventListener("DOMContentLoaded", () => {
 			navToggle.setAttribute("aria-label", isOpen ? "Close main menu" : "Open main menu");
 		});
 	}
+
+	const copyText = async (text) => {
+		if (navigator.clipboard && window.isSecureContext) {
+			try {
+				await navigator.clipboard.writeText(text);
+				return;
+			} catch {
+				// Fall back to the selection API below.
+			}
+		}
+
+		const textArea = document.createElement("textarea");
+		textArea.value = text;
+		textArea.setAttribute("readonly", "");
+		textArea.style.position = "fixed";
+		textArea.style.top = "-9999px";
+		textArea.style.left = "-9999px";
+		document.body.append(textArea);
+		textArea.focus();
+		textArea.select();
+
+		try {
+			if (!document.execCommand("copy")) {
+				throw new Error("Copy command failed");
+			}
+		} finally {
+			textArea.remove();
+		}
+	};
+
+	document.querySelectorAll("div.sourceCode").forEach((block) => {
+		if (block.dataset.copyReady === "true") {
+			return;
+		}
+
+		const code = block.querySelector("code.sourceCode");
+		if (!code) {
+			return;
+		}
+
+		const button = document.createElement("button");
+		button.className = "code-copy-button";
+		button.type = "button";
+		button.textContent = "Copy";
+		button.setAttribute("aria-label", "Copy code");
+
+		let resetTimer;
+		const setButtonState = (state, label) => {
+			clearTimeout(resetTimer);
+			button.dataset.copyState = state;
+			button.textContent = label;
+			button.setAttribute("aria-label", label === "Copy" ? "Copy code" : label);
+			resetTimer = window.setTimeout(() => {
+				button.dataset.copyState = "idle";
+				button.textContent = "Copy";
+				button.setAttribute("aria-label", "Copy code");
+			}, 1800);
+		};
+
+		button.addEventListener("click", async () => {
+			const text = code.innerText.replace(/\u200b/g, "");
+
+			try {
+				await copyText(text);
+				setButtonState("success", "Copied");
+			} catch {
+				setButtonState("error", "Copy failed");
+			}
+		});
+
+		block.dataset.copyReady = "true";
+		block.prepend(button);
+	});
 });

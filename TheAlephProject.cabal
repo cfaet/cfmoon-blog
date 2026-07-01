@@ -9,7 +9,7 @@ description:        A personal blog and portfolio, build with the help of Lucy.
 license:            BSD-3-Clause
 license-file:       LICENSE
 author:             CFMoon Tech.
-maintainer:         business@mail.cfmoon.net
+maintainer:         fabricus@cfmoon.net
 category:           Web
 copyright:          (c) 2026 CFMoon Tech
 build-type:         Simple

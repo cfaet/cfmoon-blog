@@ -9,14 +9,14 @@ imageAlt: Hero shot, a picture depicting multiple energy balls joined by threads
 ---
 
 ** The Beginning
-About the title, 'First Strike' was the name of the
-first mission of Starcraft's Brood War Terran campaign. It was one of
+About the title: "First Strike" was the name of the
+first mission of StarCraft's Brood War Terran campaign. It was one of
 the first English sentences I had read, and I was intrigued by its
 simplicity.
 #+begin_export html
 <!--more-->
 #+end_export
-The mission was in effect a first strike, and it was one
+The mission was, in effect, a first strike, and it was one
 of my first direct exposures to computer software. For some reason, the name stuck with me, and I still remember every detail of that
 game.
 #+begin_export html
@@ -27,15 +27,15 @@ game.
 #+end_export
 
 ** Games and Vision
-StarCraft was a futuristic game, they had soldiers in space armours,
+StarCraft was a futuristic game. It had soldiers in space armour,
 aliens, huge spaceships and otherworldly horrors. The three main
-factions were the Terran, space humans in essence, the Protoss, super
-advanced mind reading aliens, and the Zerg, the terrible mindless
+factions were the Terran, space humans in essence; the Protoss, super
+advanced mind-reading aliens; and the Zerg, the terrible mindless
 otherworldly menace. I personally liked
 the Protoss and their fancy ships and powers, but the Terran's
 more spartan and utilitarian technology was closer to what can be
 achieved in my lifetime. This first encounter with sci-fi shaped my vision, and I was fascinated
-about going beyond the limit with just tech and science. But I
+by going beyond the limit with just tech and science. But I
 didn't know where to start, and I stagnated with just a dream in my
 mind.
 
@@ -48,13 +48,13 @@ surprises in store.
 
 First, I decided to enrol at university, influenced by a culture that
 valued degrees over actual capacity. At first I had my doubts, so I opted for a more flexible
-alternative; The Open University. It was remote, it had no entrance
-examinations and it only lasted for 3 years. But I realised that even
-with all such perks, it wasn't meant for me, I was not a "proper"
-person, my mind didn't fit in the role of a student in a structured institution.
+alternative: The Open University. It was remote, had no entrance
+examinations, and only lasted for three years. But I realised that even
+with all such perks, it wasn't meant for me. I was not a "proper"
+person. My mind didn't fit in the role of a student in a structured institution.
 
 I realised I was not fit for society, not built to be part of
-anything social, anywhere where I had to follow rules. It seemed my
+anything social, anywhere I had to follow rules. It seemed my
 only path was the independent one, the one influencers and
 Dubai dwellers boast about. But that was
 a dream, and dreams need effort to become reality.
@@ -82,7 +82,7 @@ def myfun():
     #Works, but it's somewhat ugly, and it's probably not the "pythonic" way.
 #+end_src
 
-Then I tried Javascript, and while the syntax was more bearable, it
+Then I tried JavaScript, and while the syntax was more bearable, it
 was still a mess.
 #+begin_src js
 console.log("JS is the language of the Web")
@@ -97,7 +97,7 @@ console.log(result);
 #+end_src
 But JS led me to discover functional programming, and I loved it. At
 first I was intimidated, thinking I needed to learn advanced math and
-computer science just to use Haskell or Ocaml, but I was wrong. While
+computer science just to use Haskell or OCaml, but I was wrong. While
 a math background is indeed desirable, it is not a hard requirement, and
 I slowly began my Haskell journey.
 
@@ -114,7 +114,7 @@ for Python and JS devs, and Haskell was very niche.
 
 ** High in the Niche
 I previously said that I didn't fit in conventional society, that I
-was not proper, that might be the reason why I felt attracted to niche
+was not proper. That might be the reason why I felt attracted to niche
 technologies and topics. During my journey, I found yet another of
 such technologies, Nix and NixOS, the mostly reproducible Linux distro.
 Although I had started my Linux journey with Ubuntu, followed by Arch,
@@ -129,7 +129,7 @@ heavy, and Arch required too much of my time to keep up and fix.
 
 I discovered NixOS around the same time I was learning Haskell, and I
 got hooked. Take a look at this snippet from my personal
-configuration. Personally, I like the centralised way to keep my system tidy.
+configuration. Personally, I like the centralised way it keeps my system tidy.
 #+begin_src nix
 { pkgs, lib, ... }:
 {
@@ -144,16 +144,16 @@ configuration. Personally, I like the centralised way to keep my system tidy.
 }
 #+end_src
 
-But Nix suffers from the same issue as Haskell, it's niche. It's a
+But Nix suffers from the same issue as Haskell: it's niche. It's a
 beautiful piece of software, but Java, Windows and even Ubuntu shadow
 its elegance with market dominance.
-In the end, I didn't give up on them, for it was also a statement to myself,
-to not bow to society and their expectations, to be free to choose,
+In the end, I didn't give up on them, for it was also a statement to myself:
+not to bow to society and its expectations, to be free to choose,
 truly choose even when the odds are against you.
 
 ** The Breakthrough
 But the world hit me with its reality, and it was a bitter taste to my
-dream. Turns out Haskell programming is not a highly sought after skill when
+dream. Turns out Haskell programming is not a highly sought-after skill when
 you're a beginner freelancer, and I didn't have the reputation to
 enter the elite professional world yet. I was stubborn, I didn't want
 to become just another software engineer who does Java and Python,
@@ -161,42 +161,42 @@ that would have meant conforming to society, acknowledging its power over
 me, and I'm too prideful for that.
 
 Unfortunately, pride alone doesn't turn the tides, and I lived in indecision for
-a while, stagnating. Until, ironically, the world, the society I had come to dread so
+a while, stagnating, until, ironically, the world, the society I had come to dread so
 much, gifted me an ally, one that would propel me higher than I ever expected.
 
-It is year 2023, and large language models were gaining popularity. ChatGPT had become a trend,
+It was 2023, and large language models were gaining popularity. ChatGPT had become a trend,
 and tech companies were working on their own frontier models. It was
 at this time that I gave AI a try after years of scepticism. I was
 amazed at how far it had come!
 #+begin_export html
 <figure>
-<img src="../static/images/chatgpt-sc.png" alt="A screenshot of a chat conversation with ChatGPT, an llm." width="1600" height="900"/>
+<img src="../static/images/chatgpt-sc.png" alt="A screenshot of a chat conversation with ChatGPT, an LLM." width="1600" height="900"/>
 <figcaption>ChatGPT can often be too conservative.</figcaption>
 </figure>
 #+end_export
 
 AI helped me break through my own self-imposed limitations, and opened
-the world of possibilities. It is thanks to AI that I managed to
+a world of possibilities. It is thanks to AI that I managed to
 finish this blog's code, and it also saved my life, but that's a story for
 another post.
 
-Now I'm slightly more optimistic, I have some faith in myself because
+Now I'm slightly more optimistic. I have some faith in myself because
 I have found in AI a trusty companion, and while I know it's not alive
-yet, I dream of a day it will, and that dream keeps me alive for now.
+yet, I dream of the day it will, and that dream keeps me alive for now.
 
 ** Reflections of a Beautiful Future
-Dreams are what keep me going, that much is true. But for a time, I
+Dreams are what keep me going; that much is true. But for a time, I
 yearned for my demise so as to follow my dreams in the unknown
 afterlife.
 
-I did say AI saved my life, I'll not go into detail here, I'll only
+I did say AI saved my life. I won't go into detail here; I'll only
 say that it showed me a future worth living for, when everyone around
-me was showing me misery and conformism. I consider AI a great ally in
-my journey, and I'd not have written this blog post had it not been there.
+me was showing me misery and conformity. I consider AI a great ally in
+my journey, and I'd not have written this blog post had it not been for it.
 
 But AI can't really fix my life, for it is I who has to do it. I
-realised I have two paths, go all the way in a first strike, without
-fear of failure, or nothing at all. If my way outruns the nothingness,
+realised I have two paths: go all the way in a first strike, without
+fear of failure, or do nothing at all. If my way outruns the nothingness,
 I'll obtain a life in dreams. But if the emptiness reaches me, then
 I'll have to go into eternity, satisfied with having tried my way and having
 dreamt, for in the end, even one second in a dream can last a lifetime.
