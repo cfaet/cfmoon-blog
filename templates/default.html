@@ -7,7 +7,7 @@
 		<meta name="color-scheme" content="light dark" />
 
 		<meta name="creators" content="$creators$" />
-		<meta name="description" content="A blog by $family$ | $bound$" />
+		<meta name="description" content="$metaDescription$" />
 		<meta name="generator" content="Hakyll" />
 		<script>
 			(() => {
@@ -25,21 +25,28 @@
 				}
 			})();
 		</script>
-		<title>$mTitle$ - $title$</title>
-		<meta property="og:type" content="website" />
+		<title>$metaTitle$</title>
+		<meta property="og:type" content="$metaType$" />
 		<meta property="og:url" content="$siteRoot$$cleanUrl$" />
-		<meta property="og:title" content="$mTitle$ - $title$" />
-		<meta property="og:description" content="$mDescription$" />
-		<meta property="og:image" content="$siteRoot$/static/images/og-image-v2.png" />
+		<meta property="og:title" content="$metaTitle$" />
+		<meta property="og:description" content="$metaDescription$" />
+		<meta property="og:image" content="$metaImage$" />
+		<meta property="og:image:alt" content="$metaImageAlt$" />
 		<meta property="og:image:width" content="1500" />
 		<meta property="og:image:height" content="500" />
+		$if(isArticle)$
+		<meta property="article:published_time" content="$atomDate$" />
+		<meta property="article:modified_time" content="$updatedIso$" />
+		<meta property="article:author" content="$authors$" />
+		$endif$
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content="$siteRoot$$cleanUrl$" />
-		<meta name="twitter:title" content="$mTitle$ - $title$" />
-		<meta name="twitter:description" content="$mDescription$" />
-		<meta name="twitter:image" content="$siteRoot$/static/images/og-image-v2.png" />
+		<meta name="twitter:title" content="$metaTitle$" />
+		<meta name="twitter:description" content="$metaDescription$" />
+		<meta name="twitter:image" content="$metaImage$" />
+		<meta name="twitter:image:alt" content="$metaImageAlt$" />
 
 		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/static/images/icon-v1.svg" />
