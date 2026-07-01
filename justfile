@@ -40,9 +40,6 @@ watch:
     @echo ">>> Entering watch mode. Rebuilding on file changes..."
     {{hakyll-bin}} watch
 
-# Create a new Org post with front matter, date, and slug.
-new-post title:
-    zsh scripts/new-post "{{title}}"
 
 # Gather files and combine them into a single file, useful to provide code for Lucia
 cat := require("cat")
