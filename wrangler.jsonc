@@ -13,4 +13,11 @@
 		"enabled": true
 	},
 	"upload_source_maps": true,
+	"workers_dev": false,
+	"routes": [
+		{
+			"pattern": "blog.cfmoon.net",
+			"custom_domain": true
+		}
+	]
 }

@@ -64,7 +64,8 @@ cfmoonRules = do
         route idRoute
         compile $ do
             let feedCtx =
-                    modificationTimeField "updated" "%Y-%m-%dT%H:%M:%SZ"
+                    updatedDateTimeField "updated"
+                        <> modificationTimeField "updated" "%Y-%m-%dT%H:%M:%SZ"
                         <> teaserField "summary" "content"
                         <> bodyField "description"
                         <> postCtx
@@ -79,8 +80,8 @@ cfmoonRules = do
             posts <- recentFirst =<< loadAll "posts/*"
             let postSitemapCtx =
                     constField "domain" siteRoot
+                        <> updatedDateIsoField "mDate"
                         <> postCtx
-                        <> dateField "mDate" "%Y-%m-%d"
                 sitemapCtx =
                     constField "domain" siteRoot
                         <> listField "posts" postSitemapCtx (return posts)

@@ -6,6 +6,8 @@ authors: Fabrizio & Catrin
 tags: [writing, story, biography]
 image: ../static/images/fifth-try.png
 imageAlt: Hero shot, a picture depicting multiple energy balls joined by threads of light, representing each soul's place in the universe.
+
+updated: 2026-07-01
 ---
 
 ** The Beginning

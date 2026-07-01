@@ -5,13 +5,17 @@ module Mooneghan.Contexts (
     cleanIndexUrl,
     mooneghanCtx,
     postCtx,
+    updatedDateField,
+    updatedDateIsoField,
+    updatedDateTimeField,
     archiveCtx,
     indexCtx,
 ) where
 
+import Data.Char (isDigit, isSpace)
 import Data.List (isSuffixOf)
-import Data.Char (isSpace)
 import qualified Data.List as List
+import Text.Read (readMaybe)
 import Hakyll
 
 siteRoot :: String
@@ -52,6 +56,95 @@ metadataValue ident (key : keys) = do
     case stripWhitespace <$> value of
         Just x | not (null x) -> return $ Just x
         _ -> metadataValue ident keys
+
+data MetadataDate = MetadataDate
+    { metadataYear :: String
+    , metadataMonth :: Int
+    , metadataDay :: Int
+    }
+
+metadataUpdatedDate :: Identifier -> Compiler MetadataDate
+metadataUpdatedDate ident = do
+    value <- metadataValue ident ["updated", "date"]
+    case value >>= parseMetadataDate of
+        Just parsedDate -> return parsedDate
+        Nothing -> noResult $ "Expected updated/date metadata as YYYY-MM-DD for " ++ show ident
+
+parseMetadataDate :: String -> Maybe MetadataDate
+parseMetadataDate value = do
+    let (year, rest) = splitAt 4 value
+        (month, dayWithDash) = splitAt 2 $ drop 1 rest
+        day = drop 1 dayWithDash
+    if length value == 10
+        && all isDigit year
+        && take 1 rest == "-"
+        && all isDigit month
+        && take 1 dayWithDash == "-"
+        && all isDigit day
+        then do
+            monthNumber <- readMaybe month
+            dayNumber <- readMaybe day
+            if monthNumber >= 1 && monthNumber <= 12 && dayNumber >= 1 && dayNumber <= 31
+                then
+                    return
+                        MetadataDate
+                            { metadataYear = year
+                            , metadataMonth = monthNumber
+                            , metadataDay = dayNumber
+                            }
+                else Nothing
+        else Nothing
+
+monthName :: Int -> String
+monthName month =
+    [ "January"
+    , "February"
+    , "March"
+    , "April"
+    , "May"
+    , "June"
+    , "July"
+    , "August"
+    , "September"
+    , "October"
+    , "November"
+    , "December"
+    ]
+        !! (month - 1)
+
+formatMetadataDate :: MetadataDate -> String
+formatMetadataDate metadataDate =
+    metadataYear metadataDate
+        ++ "-"
+        ++ pad2 (metadataMonth metadataDate)
+        ++ "-"
+        ++ pad2 (metadataDay metadataDate)
+  where
+    pad2 n
+        | n < 10 = "0" ++ show n
+        | otherwise = show n
+
+formatDisplayDate :: MetadataDate -> String
+formatDisplayDate metadataDate =
+    monthName (metadataMonth metadataDate)
+        ++ " "
+        ++ show (metadataDay metadataDate)
+        ++ ", "
+        ++ metadataYear metadataDate
+
+updatedDateFieldWith :: String -> (MetadataDate -> String) -> Context String
+updatedDateFieldWith key formatter = field key $ \item ->
+    formatter <$> metadataUpdatedDate (itemIdentifier item)
+
+updatedDateField :: String -> Context String
+updatedDateField key = updatedDateFieldWith key formatDisplayDate
+
+updatedDateIsoField :: String -> Context String
+updatedDateIsoField key = updatedDateFieldWith key formatMetadataDate
+
+updatedDateTimeField :: String -> Context String
+updatedDateTimeField key = updatedDateFieldWith key $ \metadataDate ->
+    formatMetadataDate metadataDate ++ "T00:00:00Z"
 
 absoluteUrl :: String -> String
 absoluteUrl rawPath
@@ -120,6 +213,8 @@ mooneghanCtx =
 postCtx :: Context String
 postCtx =
     postMetaCtx
+        <> updatedDateField "updated"
+        <> updatedDateTimeField "updatedIso"
         <> mooneghanCtx
         <> dateField "atomDate" "%Y-%m-%dT%H:%M:%SZ"
 
