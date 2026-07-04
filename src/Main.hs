@@ -3,6 +3,8 @@
 import Hakyll
 import Mooneghan.Contexts
 import System.FilePath (takeBaseName, takeFileName, (</>))
+import Text.Printf (printf)
+import Text.Read (readMaybe)
 
 main :: IO ()
 main =
@@ -34,7 +36,7 @@ cfmoonRules = do
         compile $ getResourceString >>= applyAsTemplate mooneghanCtx
 
     match "posts/*" $ do
-        route cleanRoute
+        route postRoute
         compile $
             pandocCompiler
                 >>= loadAndApplyTemplate "templates/post.html" postCtx
@@ -60,6 +62,14 @@ cfmoonRules = do
                 >>= loadAndApplyTemplate "templates/default.html" (postListCtx archiveCtx)
                 >>= cleanInnerUrls
                 >>= relativizeUrls
+
+    create ["_redirects"] $ do
+        route idRoute
+        compile $ do
+            posts <- loadAll "posts/*"
+            redirectLines <- fmap concat $ mapM postRedirects posts
+            makeItem $ unlines redirectLines
+
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
@@ -96,6 +106,35 @@ cleanRoute :: Routes
 cleanRoute = customRoute createIndexRoute
   where
     createIndexRoute ident = takeBaseName (toFilePath ident) </> "index.html"
+
+postRoute :: Routes
+postRoute =
+    metadataRoute $ \metadata ->
+        customRoute $ \ident ->
+            "musings"
+                </> numberedSlug metadata (takeBaseName $ toFilePath ident)
+                </> "index.html"
+
+numberedSlug :: Metadata -> String -> String
+numberedSlug metadata slug =
+    case lookupString "number" metadata >>= readMaybe of
+        Just number -> printf "%03d-%s" (number :: Int) slug
+        Nothing -> error $ "Expected numeric number metadata for post: " ++ slug
+
+postRedirects :: Item String -> Compiler [String]
+postRedirects item = do
+    routePath <- getRoute ident
+    case routePath of
+        Nothing -> noResult $ "No route found for " ++ show ident
+        Just path ->
+            let oldUrl = "/" ++ takeBaseName (toFilePath ident)
+                newUrl = cleanIndexUrl $ toUrl path
+             in return
+                    [ oldUrl ++ " " ++ newUrl ++ " 301"
+                    , oldUrl ++ "/ " ++ newUrl ++ " 301"
+                    ]
+  where
+    ident = itemIdentifier item
 
 cleanRobots :: Routes
 cleanRobots = customRoute createRobotsRoute

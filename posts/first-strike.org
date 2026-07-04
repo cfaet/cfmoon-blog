@@ -2,9 +2,10 @@
 title: First Strike
 subtitle: Every story has a beginning
 date: 2025-12-16
+number: 1
 authors: Fabrizio & Catrin
 tags: [writing, story, biography]
-image: ../static/images/fifth-try.png
+image: /static/images/fifth-try.png
 imageAlt: Hero shot, a picture depicting multiple energy balls joined by threads of light, representing each soul's place in the universe.
 
 updated: 2026-07-01
@@ -23,7 +24,7 @@ of my first direct exposures to computer software. For some reason, the name stu
 game.
 #+begin_export html
 <figure>
-<img src="../static/images/sc1-ss.jpg" alt="A screenshot of the game StarCraft" width="1600" height="900"/>
+<img src="/static/images/sc1-ss.jpg" alt="A screenshot of the game StarCraft" width="1600" height="900"/>
 <figcaption>First Strike, the first mission of the Terran Campaign. Credits: Blizzard Entertainment</figcaption>
 </figure>
 #+end_export
@@ -124,7 +125,7 @@ I felt that those two were not my thing. Ubuntu was fine but too
 heavy, and Arch required too much of my time to keep up and fix.
 #+begin_export html
 <figure>
-<img src="../static/images/balloon-two.png" alt="An image showing a red balloon flying over a modern skyline." width="1600" height="900"/>
+<img src="/static/images/balloon-two.png" alt="An image showing a red balloon flying over a modern skyline." width="1600" height="900"/>
 <figcaption>Flying Solo</figcaption>
 </figure>
 #+end_export
@@ -172,7 +173,7 @@ at this time that I gave AI a try after years of scepticism. I was
 amazed at how far it had come!
 #+begin_export html
 <figure>
-<img src="../static/images/chatgpt-sc.png" alt="A screenshot of a chat conversation with ChatGPT, an LLM." width="1600" height="900"/>
+<img src="/static/images/chatgpt-sc.png" alt="A screenshot of a chat conversation with ChatGPT, an LLM." width="1600" height="900"/>
 <figcaption>ChatGPT can often be too conservative.</figcaption>
 </figure>
 #+end_export
