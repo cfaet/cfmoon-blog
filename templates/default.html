@@ -8,6 +8,9 @@
 
 		<meta name="creators" content="$creators$" />
 		<meta name="description" content="$metaDescription$" />
+		$if(metaKeywords)$
+		<meta name="keywords" content="$metaKeywords$" />
+		$endif$
 		<meta name="generator" content="Hakyll" />
 		<script>
 			(() => {
@@ -38,6 +41,9 @@
 		<meta property="article:published_time" content="$atomDate$" />
 		<meta property="article:modified_time" content="$updatedIso$" />
 		<meta property="article:author" content="$authors$" />
+		$if(articleTagsMeta)$
+		$articleTagsMeta$
+		$endif$
 		$endif$
 
 		<!-- Twitter -->
@@ -66,7 +72,7 @@
 		<!-- Preload critical assets -->
 		<link
 			rel="preload"
-			href="/static/images/logo-horizontal-dark-latest-large-v2.svg"
+			href="/static/images/logo-horizontal-dark-latest-large-v2-path-text.svg"
 			as="image"
 			type="image/svg+xml"
 		/>

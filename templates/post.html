@@ -49,6 +49,12 @@
 					<span itemprop="name">$authors$</span>
 				</div>
 			</div>
+			$if(tagChips)$
+			<div class="post-tags" aria-label="Tags">
+				<span class="post-tags-label">Tags:</span>
+				<div class="post-tags-list">$tagChips$</div>
+			</div>
+			$endif$
 		</div>
 	</header>
 	<section class="post-content" itemprop="articleBody">$body$</section>

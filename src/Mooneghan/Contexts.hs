@@ -12,11 +12,15 @@ module Mooneghan.Contexts (
     indexCtx,
 ) where
 
-import Data.Char (isDigit, isSpace)
-import Data.List (isSuffixOf)
+import Data.Char (isDigit, isSpace, toLower)
+import Data.List (intercalate, isSuffixOf)
 import qualified Data.List as List
-import Text.Read (readMaybe)
 import Hakyll
+import Text.Blaze.Html.Renderer.String (renderHtml)
+import Text.Blaze.Html5 ((!))
+import qualified Text.Blaze.Html5 as H
+import qualified Text.Blaze.Html5.Attributes as A
+import Text.Read (readMaybe)
 
 siteRoot :: String
 siteRoot = "https://blog.cfmoon.net"
@@ -25,7 +29,7 @@ siteTitle :: String
 siteTitle = "The Aleph Project"
 
 siteDescription :: String
-siteDescription = "A blog by CFMoon | Musings on software and life."
+siteDescription = "A blog by CFMoon Tech | Musings on software and life."
 
 fallbackMetaImage :: String
 fallbackMetaImage = siteRoot ++ "/static/images/og-image-v2.png"
@@ -160,6 +164,39 @@ absoluteUrl rawPath
         | "./" `List.isPrefixOf` p = dropRelativePrefix $ drop 2 p
         | otherwise = p
 
+tagSlug :: String -> String
+tagSlug = intercalate "-" . words . map toLower . stripWhitespace
+
+tagsForItem :: Item a -> Compiler [String]
+tagsForItem = getTags . itemIdentifier
+
+nonEmptyTagsField :: String -> ([String] -> String) -> Context a
+nonEmptyTagsField key formatter = field key $ \item -> do
+    tags <- tagsForItem item
+    case tags of
+        [] -> noResult $ "No tags for " ++ show (itemIdentifier item)
+        _ -> return $ formatter tags
+
+tagChipsField :: String -> Context a
+tagChipsField key = nonEmptyTagsField key $ renderHtml . mapM_ tagChip
+  where
+    tagChip tag =
+        H.span
+            ! A.class_ "post-tag-chip"
+            ! H.dataAttribute "tag-slug" (H.toValue $ tagSlug tag)
+            $ H.toHtml tag
+
+articleTagsMetaField :: String -> Context a
+articleTagsMetaField key = nonEmptyTagsField key $ renderHtml . mapM_ articleTagMeta
+  where
+    articleTagMeta tag =
+        H.meta
+            ! A.property "article:tag"
+            ! A.content (H.toValue tag)
+
+metaKeywordsField :: String -> Context a
+metaKeywordsField key = nonEmptyTagsField key $ intercalate ", "
+
 siteMetaCtx :: Context String
 siteMetaCtx =
     constField "metaTitle" siteTitle
@@ -172,6 +209,9 @@ postMetaCtx :: Context String
 postMetaCtx =
     constField "metaType" "article"
         <> constField "isArticle" "true"
+        <> tagChipsField "tagChips"
+        <> articleTagsMetaField "articleTagsMeta"
+        <> metaKeywordsField "metaKeywords"
         <> field "metaTitle" postTitle
         <> field "metaDescription" postDescription
         <> field "metaImage" postImage
